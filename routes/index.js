@@ -27,31 +27,51 @@ router.get("/hello", query("person").trim().notEmpty().escape(), (req, res) => {
 router.post(
   "/sign-up",
   [
-    body("name")
+    body("first_name")
       .trim()
       .notEmpty()
       .withMessage("Must not be empty")
-      .isLength({ min: 3, max: 10 })
-      .withMessage("Must be between 3 and 10 characters"),
-    body("index")
+      .isAlpha()
+      .withMessage("Must be alphabet"),
+    body("last_name")
+      .trim()
       .notEmpty()
       .withMessage("Must not be empty")
-      .equals("3")
-      .withMessage("Should be equals to 3"),
+      .isAlpha()
+      .withMessage("Must be alphabet"),
+    body("email")
+      .notEmpty()
+      .withMessage("This field should not be empty")
+      .isEmail()
+      .withMessage("It must be an email"),
+    body("password")
+      .trim()
+      .notEmpty()
+      .isLength({ min: 8, max: 12 })
+      .withMessage("Must be between 8 and 12 characters"),
+    body("confirmPassword")
+      .trim()
+      .notEmpty()
+      .isLength({ min: 8, max: 12 })
+      .withMessage("Must be between 8 and 12 characters")
+      .equals()
+      .withMessage("Must be equals to password field"),
   ],
+
   (req, res) => {
     const result = validationResult(req);
-    const data = matchedData(req);
-    console.log(result);
-    console.log(data);
+
+    if (result.isEmpty()) {
+      const data = matchedData(req);
+      return res.send(data);
+    }
+
+    res.send({ errors: result.array() });
 
     // bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
     //   // if err, do something
     //   // otherwise, store hashedPassword in DB
     // });
-
-    console.log("We're here");
-    res.json(result);
   }
 );
 
