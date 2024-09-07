@@ -1,17 +1,35 @@
 const bcrypt = require("bcryptjs");
+const db = require("../db/queries");
 const asyncHandler = require("express-async-handler");
+const { matchedData, validationResult } = require("express-validator");
 
 // Create a new user
-const createUser = asyncHandler(
-  async (first_name, last_name, email, password) => {
-    const hashedPassword = await bcrypt.hash(password, 10); // Hash the password
-    const result = await pool.query(
-      "INSERT INTO users (first_name, last_name, email, password) VALUES ($1, $2, $3, $4) RETURNING id",
-      [first_name, last_name, email, hashedPassword]
-    );
-    return result.rows[0].id; // Return the new user's ID
+const createUser = asyncHandler(async (req, res) => {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
   }
-);
+
+  const data = matchedData(req);
+
+  try {
+    // Hash the password asynchronously
+    const hashedPassword = await bcrypt.hash(data.password, 10);
+
+    
+    const user =  await db.insertUser(data, hashedPassword);
+
+
+    // Send a success response
+    res.status(201).json({ message: "User created successfully", user });
+  } catch (error) {
+    // Handle errors from bcrypt or any other issue
+    res
+      .status(500)
+      .json({ message: "Internal server error", error: error.message });
+  }
+});
 
 // // Find a user by email
 // const findUserByEmail = asyncHandler(async (email) => {
