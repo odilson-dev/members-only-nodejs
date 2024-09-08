@@ -17,18 +17,29 @@ const createUser = asyncHandler(async (req, res) => {
     // Hash the password asynchronously
     const hashedPassword = await bcrypt.hash(data.password, 10);
 
-    
-    const user =  await db.insertUser(data, hashedPassword);
-
+    const result = await db.insertUser(data, hashedPassword);
+    // Retrieve the inserted user's ID
+    const id = result.rows[0].id;
 
     // Send a success response
-    res.status(201).json({ message: "User created successfully", user });
+    res.status(201).render("join-the-club", { user: data, id });
   } catch (error) {
     // Handle errors from bcrypt or any other issue
     res
       .status(500)
       .json({ message: "Internal server error", error: error.message });
   }
+});
+
+// check pass code
+const checkPassCode = asyncHandler(async (req, res) => {
+  const errors = validationResult(req);
+  if (errors.isEmpty()) {
+    const { id } = req.params;
+    await db.updateMembershipStatus(id, true);
+    return res.send("Success, you're a member");
+  }
+  res.status(400).json({ errors: errors.array() });
 });
 
 // // Find a user by email
@@ -55,6 +66,7 @@ const createUser = asyncHandler(async (req, res) => {
 
 module.exports = {
   createUser,
+  checkPassCode,
   //   findUserByEmail,
   //   verifyPassword,
   //   checkMembershipStatus,
