@@ -5,10 +5,10 @@
     <title>Members Only | Node JS</title>
   </head>
   <body>
-    <% if (user) {%>
-    <h1>WELCOME BACK <%= user.first_name %></h1>
+    <% if (currentUser) {%>
+    <h1>WELCOME BACK <%= currentUser.first_name %></h1>
 
-    <a href="/new-message">Create a new message</a>
+    <a href="messages/new">Create a new message</a>
 
     <a href="/log-out">LOG OUT</a>
     <% } else { %>

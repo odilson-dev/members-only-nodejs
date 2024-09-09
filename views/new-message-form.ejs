@@ -5,5 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>New message</title>
   </head>
-  <body></body>
+  <body>
+    <form action="/messages/new" method="POST">
+      <input type="hidden" name="userId" value="<%= currentUser.id %>" />
+      <div>
+        <label for="title">Title:</label><br />
+        <input type="text" name="title" id="title" placeholder="Your title" />
+      </div>
+
+      <div>
+        <label for="content">Message:</label><br />
+        <textarea name="content" id="content" cols="30" rows="10"></textarea>
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  </body>
 </html>
