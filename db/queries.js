@@ -15,5 +15,12 @@ async function updateMembershipStatus(id, status) {
     [status, id]
   );
 }
+async function insertMessage(message) {
+  return await pool.query(
+    `INSERT INTO messages (title, text, user_id, created_at) VALUES ($1, $2, $3, $4) 
+    RETURNING id;`,
+    [message.title, message.content, message.userId, "NOW()"]
+  );
+}
 
-module.exports = { insertUser, updateMembershipStatus };
+module.exports = { insertUser, updateMembershipStatus, insertMessage };
