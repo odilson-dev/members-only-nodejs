@@ -49,9 +49,13 @@ passport.deserializeUser(async (id, done) => {
     done(err);
   }
 });
+router.use((req, res, next) => {
+  res.locals.currentUser = req.user;
+  next();
+});
 
 router.get("/", (req, res) => {
-  res.render("index", { user: req.user });
+  res.render("index");
 });
 
 router.post(

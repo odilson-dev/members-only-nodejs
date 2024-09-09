@@ -7,7 +7,7 @@ const createMessageValidationSchema = {
       errorMessage: "The title must be between 3 and 60 characters",
     },
   },
-  message: {
+  content: {
     trim: { options: [" "] },
     notEmpty: { errorMessage: "Message content must not be empty" },
     isLength: {
@@ -15,7 +15,7 @@ const createMessageValidationSchema = {
       errorMessage: "The message must be between 3 and 250 characters",
     },
   },
-  user_id: {
+  userId: {
     trim: { options: [" "] },
     notEmpty: { errorMessage: " User Id must not be empty" },
   },
