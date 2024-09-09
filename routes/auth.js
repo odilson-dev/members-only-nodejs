@@ -1,29 +1,37 @@
 var express = require("express");
 var router = express.Router();
-const session = require("express-session");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
+const bcrypt = require("bcryptjs");
+const pool = require("../db/pool");
 
 passport.use(
-  new LocalStrategy(async (email, password, done) => {
-    try {
-      const { rows } = await pool.query(
-        "SELECT * FROM users WHERE email = $1",
-        [email]
-      );
-      const user = rows[0];
+  new LocalStrategy(
+    { usernameField: "email" },
+    async (email, password, done) => {
+      console.log(email);
+      try {
+        const { rows } = await pool.query(
+          "SELECT * FROM users WHERE email = $1",
+          [email]
+        );
+        const user = rows[0];
 
-      if (!user) {
-        return done(null, false, { message: "Incorrect email" });
+        if (!user) {
+          return done(null, false, { message: "Incorrect email" });
+        }
+        const match = await bcrypt.compare(password, user.password);
+        if (!match) {
+          // passwords do not match!
+          return done(null, false, { message: "Incorrect password" });
+        }
+
+        return done(null, user);
+      } catch (err) {
+        return done(err);
       }
-      if (user.password !== password) {
-        return done(null, false, { message: "Incorrect password" });
-      }
-      return done(null, user);
-    } catch (err) {
-      return done(err);
     }
-  })
+  )
 );
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -53,5 +61,13 @@ router.post(
     failureRedirect: "/",
   })
 );
+router.get("/log-out", (req, res, next) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
+});
 
 module.exports = router;
