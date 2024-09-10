@@ -54,10 +54,6 @@ router.use((req, res, next) => {
   next();
 });
 
-router.get("/", (req, res) => {
-  res.render("index");
-});
-
 router.post(
   "/log-in",
   passport.authenticate("local", {

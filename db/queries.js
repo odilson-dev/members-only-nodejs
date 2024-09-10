@@ -23,4 +23,17 @@ async function insertMessage(message) {
   );
 }
 
-module.exports = { insertUser, updateMembershipStatus, insertMessage };
+async function selectAllMessages() {
+  const { rows } =
+    await pool.query(`SELECT messages.title, messages.text, messages.created_at, users.first_name, users.last_name
+  FROM messages
+  JOIN users ON messages.user_id = users.id;
+  `);
+  return rows;
+}
+module.exports = {
+  insertUser,
+  updateMembershipStatus,
+  insertMessage,
+  selectAllMessages,
+};

@@ -24,4 +24,8 @@ const createMessage = asyncHandler(async (req, res) => {
       .json({ message: "Internal server error", error: error.message });
   }
 });
-module.exports = { createMessage };
+
+const getAllMessages = asyncHandler(async (req, res) => {
+  const messages = await db.selectAllMessages();
+});
+module.exports = { createMessage, getAllMessages };

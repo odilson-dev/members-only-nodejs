@@ -9,6 +9,25 @@
     <h1>WELCOME BACK <%= currentUser.first_name %></h1>
 
     <a href="messages/new">Create a new message</a>
+    <% if (currentUser.membership_status){ messages.map( message =>{ %>
+    <div class="message">
+      <h1><%= message.title %></h1>
+      <p><%= message.text %></p>
+      <!-- Show author's name if user is a member -->
+      <p>
+        Written by: <%= message.first_name %> <%= message.last_name %> on <%=
+        message.created_at %>
+      </p>
+    </div>
+
+    <% }) %> <% } else { messages.map( message =>{ %>
+    <div class="message">
+      <h1><%= message.title %></h1>
+      <p><%= message.text %></p>
+      <p>Written by: Anonymous</p>
+    </div>
+
+    <% }) %> <% }; %>
 
     <a href="/log-out">LOG OUT</a>
     <% } else { %>

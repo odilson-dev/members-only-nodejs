@@ -28,8 +28,8 @@ app.use(session({ secret: "cats", resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use("/", indexRouter);
 app.use("/", authRouter);
+app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/messages", messageRouter);
 
