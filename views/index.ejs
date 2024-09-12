@@ -8,6 +8,12 @@
     <% if (currentUser) {%>
     <h1>WELCOME BACK <%= currentUser.first_name %></h1>
 
+    <% if (currentUser.admin) { %>
+
+    <a href="/users/dashboard">Dashboard</a>
+
+    <% } %>
+
     <a href="messages/new">Create a new message</a><br />
     <% if (currentUser.membership_status){ messages.map( message =>{ %>
     <div class="message">
