@@ -8,7 +8,7 @@
     <% if (currentUser) {%>
     <h1>WELCOME BACK <%= currentUser.first_name %></h1>
 
-    <a href="messages/new">Create a new message</a>
+    <a href="messages/new">Create a new message</a><br />
     <% if (currentUser.membership_status){ messages.map( message =>{ %>
     <div class="message">
       <h1><%= message.title %></h1>
@@ -19,8 +19,12 @@
         message.created_at %>
       </p>
     </div>
+    <a href="/log-out">LOG OUT</a>
+    <% }) } else { %>
 
-    <% }) %> <% } else { messages.map( message =>{ %>
+    <a href="/users/join-the-club">Become a member</a>
+
+    <% messages.map( message =>{ %>
     <div class="message">
       <h1><%= message.title %></h1>
       <p><%= message.text %></p>
@@ -39,6 +43,14 @@
       <input id="password" name="password" type="password" />
       <button>Log In</button>
     </form>
-    <%}%>
+
+    <% messages.map( message => { %>
+    <div class="message">
+      <h1><%= message.title %></h1>
+      <p><%= message.text %></p>
+      <p>Written by: Anonymous</p>
+    </div>
+
+    <% }) }%>
   </body>
 </html>

@@ -37,8 +37,7 @@ const checkPassCode = asyncHandler(async (req, res) => {
   if (errors.isEmpty()) {
     const { id } = req.params;
     await db.updateMembershipStatus(id, true);
-    return r
-    res.send("Success, you're a member");
+    return res.send("Success, you're a member");
   }
   res.status(400).json({ errors: errors.array() });
 });

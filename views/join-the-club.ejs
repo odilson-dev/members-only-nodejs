@@ -8,7 +8,7 @@
   <body>
     <h1>Hello Jon</h1>
     <p>Enter the secret pass code to join the club</p>
-    <form action="/users/join-the-club/4" method="POST">
+    <form action="/users/join-the-club/<%= currentUser.id %>" method="POST">
       <h2>Join the club now!</h2>
       <input type="text" name="passCode" id="passCode" />
       <button type="submit">Submit</button>
