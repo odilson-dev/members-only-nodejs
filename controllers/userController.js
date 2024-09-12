@@ -42,6 +42,11 @@ const checkPassCode = asyncHandler(async (req, res) => {
   res.status(400).json({ errors: errors.array() });
 });
 
+const showDashboard = asyncHandler(async (req, res) => {
+  const messages = db.selectAllMessages();
+  res.render("adminDashboard", { messages });
+});
+
 // // Find a user by email
 // const findUserByEmail = asyncHandler(async (email) => {
 //   const result = await pool.query("SELECT * FROM users WHERE email = $1", [
@@ -67,6 +72,7 @@ const checkPassCode = asyncHandler(async (req, res) => {
 module.exports = {
   createUser,
   checkPassCode,
+  showDashboard,
   //   findUserByEmail,
   //   verifyPassword,
   //   checkMembershipStatus,
