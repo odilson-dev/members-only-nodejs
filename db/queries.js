@@ -1,4 +1,9 @@
 const pool = require("./pool");
+
+async function getUsers() {
+  const { rows } = await pool.query("SELECT * FROM users;");
+  return rows;
+}
 async function insertUser(user, hashedPassword) {
   return await pool.query(
     `INSERT INTO users (first_name, last_name, email, password, created_at) VALUES ($1, $2, $3, $4, $5) 
@@ -32,6 +37,7 @@ async function selectAllMessages() {
   return rows;
 }
 module.exports = {
+  getUsers,
   insertUser,
   updateMembershipStatus,
   insertMessage,
