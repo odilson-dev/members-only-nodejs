@@ -7,6 +7,10 @@ router.get("/", async (req, res) => {
   res.render("index", { messages });
 });
 
-router.get("/sign-up", (req, res) => res.render("sign-up-form"));
+router.get("/log-in", (req, res) => res.render("log-in"));
+
+router.get("/sign-up", (req, res) =>
+  res.render("sign-up-form", { errors: false })
+);
 
 module.exports = router;

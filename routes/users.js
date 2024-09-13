@@ -10,6 +10,8 @@ router.get("/", function (req, res, next) {
   res.send("respond with a resource");
 });
 
+router.get("/users/be-an-admin", (req, res) => res.render("admin-form"));
+
 router.post(
   "/new",
   checkSchema(createUserValidationSchema),
