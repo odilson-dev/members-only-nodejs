@@ -5,11 +5,12 @@ async function getUsers() {
   return rows;
 }
 async function insertUser(user, hashedPassword) {
-  return await pool.query(
+  const result = await pool.query(
     `INSERT INTO users (first_name, last_name, email, password, created_at) VALUES ($1, $2, $3, $4, $5) 
-    RETURNING id;`,
+    RETURNING id, first_name, last_name, email;`,
     [user.first_name, user.last_name, user.email, hashedPassword, "NOW()"]
   );
+  return result.rows[0];
 }
 
 async function updateMembershipStatus(id, status) {
