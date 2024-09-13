@@ -1,0 +1,15 @@
+<div class="message">
+  <h1><%= message.title %></h1>
+  <p><%= message.text %></p>
+  <% if(currentUser && currentUser.membership_status){ %>
+
+  <p>
+    Written by: <%= message.first_name %> <%= message.last_name %> on <%=
+    message.created_at %>
+  </p>
+
+  <% if(currentUser.admin) { %>
+
+  <button message_id="<%= message.id %>">Remove</button>
+  <%} } %>
+</div>

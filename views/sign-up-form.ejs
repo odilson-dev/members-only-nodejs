@@ -6,36 +6,54 @@
   </head>
   <body>
     <h1>Sign Up</h1>
+    <% if(errors){ %>
+
+    <ul class="errors">
+      <% errors.map(error => { %>
+      <li><%= error.msg %></li>
+      <% }) %>
+    </ul>
+    <% }%>
     <form action="/users/new" method="POST">
       <div>
         <label for="first_name">First name</label>
         <input
           id="first_name"
           name="first_name"
-          placeholder="first_name"
+          placeholder="John"
           type="text"
         />
       </div>
       <div>
         <label for="last_name">Last name</label>
+        <input id="last_name" name="last_name" placeholder="Doe" type="text" />
+      </div>
+      <div>
+        <label for="email">Email</label>
         <input
-          id="last_name"
-          name="last_name"
-          placeholder="last_name"
+          id="email"
+          name="email"
+          placeholder="johndoe@example.com"
           type="text"
         />
       </div>
       <div>
-        <label for="email">Email</label>
-        <input id="email" name="email" placeholder="email" type="text" />
-      </div>
-      <div>
         <label for="password">Password</label>
-        <input id="password" name="password" type="password" />
+        <input
+          id="password"
+          name="password"
+          type="password"
+          placeholder="Type your password"
+        />
       </div>
       <div>
         <label for="confirmPassword">Confirm Password</label>
-        <input id="confirmPassword" name="confirmPassword" type="password" />
+        <input
+          id="confirmPassword"
+          name="confirmPassword"
+          type="password"
+          placeholder="Confirm your password"
+        />
       </div>
       <button>Sign Up</button>
     </form>

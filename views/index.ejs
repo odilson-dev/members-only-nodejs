@@ -5,59 +5,27 @@
     <title>Members Only | Node JS</title>
   </head>
   <body>
-    <% if (currentUser) {%>
+    <% if (currentUser) { %>
     <h1>WELCOME BACK <%= currentUser.first_name %></h1>
 
+    <% if (!currentUser.admin){ %>
+    <a href="/users/be-an-admin">Be an administrator</a>
+
+    <% } %>
+
     <a href="messages/new">Create a new message</a><br />
-    <% if (currentUser.membership_status){ messages.map( message =>{ %>
-    <div class="message">
-      <h1><%= message.title %></h1>
-      <p><%= message.text %></p>
-      <!-- Show author's name if user is a member -->
-      <p>
-        Written by: <%= message.first_name %> <%= message.last_name %> on <%=
-        message.created_at %>
-      </p>
-      <% if (currentUser.admin) { %>
-
-      <button message_id="<%= message.id %>" class="delete-btn">Delete</button>
-
-      <% } %>
-    </div>
-
-    <% }) } else { %>
-
+    <% if (!currentUser.membership_status){ %>
     <a href="/users/join-the-club">Become a member</a>
 
-    <% messages.map( message =>{ %>
-    <div class="message">
-      <h1><%= message.title %></h1>
-      <p><%= message.text %></p>
-      <p>Written by: Anonymous</p>
-    </div>
-
-    <% }) %> <% }; %>
+    <% }; %>
 
     <a href="/log-out">LOG OUT</a>
     <% } else { %>
-    <h1>please log in</h1>
-    <form action="/log-in" method="POST">
-      <label for="email">Email</label>
-      <input id="email" name="email" placeholder="email" type="text" />
-      <label for="password">Password</label>
-      <input id="password" name="password" type="password" />
-      <button>Log In</button>
-    </form>
+    <p>You already have an account? <a href="/log-in">Log In</a></p>
+    <p>You're new? Please <a href="/sign-up">Sign up</a></p>
 
-    <% messages.map( message => { %>
-    <div class="message">
-      <h1><%= message.title %></h1>
-      <p><%= message.text %></p>
-      <p>Written by: Anonymous</p>
-    </div>
-
-    <% }) }%>
-
+    <% } messages.map( message => { %> <%- include('message', { message }) %> <%
+    }) %>
     <script>
       const allDeleteButtons = document.querySelectorAll("button");
 
