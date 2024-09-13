@@ -7,5 +7,17 @@
   </head>
   <body>
     <h1>My dashboard</h1>
+    <% messages.map( message =>{ %>
+    <div class="message">
+      <h1><%= message.title %></h1>
+      <p><%= message.text %></p>
+
+      <p>
+        Written by: <%= message.first_name %> <%= message.last_name %> on <%=
+        message.created_at %>
+      </p>
+    </div>
+
+    <% }) %>
   </body>
 </html>
