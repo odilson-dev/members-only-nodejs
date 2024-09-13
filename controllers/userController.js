@@ -8,7 +8,7 @@ const createUser = asyncHandler(async (req, res) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
+    return res.render("sign-up-form", { errors: errors.array() });
   }
 
   const data = matchedData(req);
@@ -17,12 +17,12 @@ const createUser = asyncHandler(async (req, res) => {
     // Hash the password asynchronously
     const hashedPassword = await bcrypt.hash(data.password, 10);
 
-    const result = await db.insertUser(data, hashedPassword);
-    // Retrieve the inserted user's ID
-    const id = result.rows[0].id;
+    const user = await db.insertUser(data, hashedPassword);
+
+    const messages = await db.selectAllMessages();
 
     // Send a success response
-    res.status(201).render("join-the-club", { user: data, id });
+    res.render("index", { messages, currentUser: user });
   } catch (error) {
     // Handle errors from bcrypt or any other issue
     res
@@ -42,32 +42,7 @@ const checkPassCode = asyncHandler(async (req, res) => {
   res.status(400).json({ errors: errors.array() });
 });
 
-// // Find a user by email
-// const findUserByEmail = asyncHandler(async (email) => {
-//   const result = await pool.query("SELECT * FROM users WHERE email = $1", [
-//     email,
-//   ]);
-//   return result.rows[0]; // Return the user object
-// });
-
-// // Verify a user's password
-// const verifyPassword = asyncHandler(async (password, hashedPassword) => {
-//   return await bcrypt.compare(password, hashedPassword); // Compare the plain-text password with the hashed password
-// });
-
-// // Check membership status of a user
-// const checkMembershipStatus = asyncHandler(async (user_id) => {
-//   const result = await pool.query(
-//     "SELECT membership_status FROM users WHERE id = $1",
-//     [user_id]
-//   );
-//   return result.rows[0].membership_status;
-//});
-
 module.exports = {
   createUser,
   checkPassCode,
-  //   findUserByEmail,
-  //   verifyPassword,
-  //   checkMembershipStatus,
 };
