@@ -2,7 +2,6 @@ const bcrypt = require("bcryptjs");
 const db = require("../db/queries");
 const asyncHandler = require("express-async-handler");
 const { matchedData, validationResult } = require("express-validator");
-const { use } = require("passport");
 
 // Create a new user
 const createUser = asyncHandler(async (req, res) => {
