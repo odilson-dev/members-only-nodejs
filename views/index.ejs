@@ -8,12 +8,6 @@
     <% if (currentUser) {%>
     <h1>WELCOME BACK <%= currentUser.first_name %></h1>
 
-    <% if (currentUser.admin) { %>
-
-    <a href="/users/dashboard">Dashboard</a>
-
-    <% } %>
-
     <a href="messages/new">Create a new message</a><br />
     <% if (currentUser.membership_status){ messages.map( message =>{ %>
     <div class="message">
@@ -24,6 +18,11 @@
         Written by: <%= message.first_name %> <%= message.last_name %> on <%=
         message.created_at %>
       </p>
+      <% if (currentUser.admin) { %>
+
+      <button message_id="<%= message.id %>" class="delete-btn">Delete</button>
+
+      <% } %>
     </div>
 
     <% }) } else { %>
@@ -58,5 +57,34 @@
     </div>
 
     <% }) }%>
+
+    <script>
+      const allDeleteButtons = document.querySelectorAll("button");
+
+      allDeleteButtons.forEach((button) => {
+        button.addEventListener("click", (e) => {
+          const messageId = button.getAttribute("message_id");
+
+          if (confirm("Are you sure you want to delete this message?")) {
+            // Send a DELETE request to the server
+            fetch(`/messages/${messageId}/delete`, {
+              method: "POST",
+            })
+              .then((response) => {
+                if (response.ok) {
+                  // Remove the item from the DOM if successfully deleted
+                  // button.closest('div').remove();
+                } else {
+                  alert("Failed to delete item. Please try again.");
+                }
+              })
+              .catch((error) => {
+                console.error("Error:", error);
+                alert("An error occurred while deleting the item.");
+              });
+          }
+        });
+      });
+    </script>
   </body>
 </html>
