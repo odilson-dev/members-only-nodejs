@@ -30,16 +30,21 @@ async function insertMessage(message) {
 
 async function selectAllMessages() {
   const { rows } =
-    await pool.query(`SELECT messages.title, messages.text, messages.created_at, users.first_name, users.last_name
+    await pool.query(`SELECT messages.id, messages.title, messages.text, messages.created_at, users.first_name, users.last_name
   FROM messages
   JOIN users ON messages.user_id = users.id;
   `);
   return rows;
+}
+
+async function deleteMessage(id) {
+  await pool.query(`DELETE FROM messages WHERE id = $1`, [id]);
 }
 module.exports = {
   getUsers,
   insertUser,
   updateMembershipStatus,
   insertMessage,
+  deleteMessage,
   selectAllMessages,
 };
