@@ -11,4 +11,5 @@ router.post(
   messageController.createMessage
 );
 
+router.post("/:id/delete", messageController.deleteMessage);
 module.exports = router;
