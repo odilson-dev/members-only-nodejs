@@ -2,6 +2,7 @@ const bcrypt = require("bcryptjs");
 const db = require("../db/queries");
 const asyncHandler = require("express-async-handler");
 const { matchedData, validationResult } = require("express-validator");
+const { use } = require("passport");
 
 // Create a new user
 const createUser = asyncHandler(async (req, res) => {
@@ -43,8 +44,9 @@ const checkPassCode = asyncHandler(async (req, res) => {
 });
 
 const showDashboard = asyncHandler(async (req, res) => {
-  const messages = db.selectAllMessages();
-  res.render("adminDashboard", { messages });
+  const messages = await db.selectAllMessages();
+  const users = await db.getUsers();
+  res.render("adminDashboard", { messages, users });
 });
 
 // // Find a user by email
