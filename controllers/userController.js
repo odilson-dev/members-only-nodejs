@@ -4,7 +4,7 @@ const asyncHandler = require("express-async-handler");
 const { matchedData, validationResult } = require("express-validator");
 
 // Create a new user
-const createUser = asyncHandler(async (req, res) => {
+const createUser = asyncHandler(async (req, res, next) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
@@ -17,18 +17,16 @@ const createUser = asyncHandler(async (req, res) => {
     // Hash the password asynchronously
     const hashedPassword = await bcrypt.hash(data.password, 10);
 
-    const user = await db.insertUser(data, hashedPassword);
+    await db.insertUser(data, hashedPassword);
 
-    const messages = await db.selectAllMessages();
-
-    // Send a success response
-    res.render("index", { messages, currentUser: user });
+    //const messages = await db.selectAllMessages();
   } catch (error) {
     // Handle errors from bcrypt or any other issue
     res
       .status(500)
       .json({ message: "Internal server error", error: error.message });
   }
+  next();
 });
 
 // check pass code

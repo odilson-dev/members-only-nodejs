@@ -9,7 +9,6 @@ passport.use(
   new LocalStrategy(
     { usernameField: "email" },
     async (email, password, done) => {
-      console.log(email);
       try {
         const { rows } = await pool.query(
           "SELECT * FROM users WHERE email = $1",
@@ -70,4 +69,4 @@ router.get("/log-out", (req, res, next) => {
   });
 });
 
-module.exports = router;
+module.exports = { passport, router };
