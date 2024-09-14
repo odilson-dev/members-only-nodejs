@@ -4,7 +4,7 @@ const asyncHandler = require("express-async-handler");
 const { matchedData, validationResult } = require("express-validator");
 
 // Create a new user
-const createUser = asyncHandler(async (req, res, next) => {
+const handleUserSignUp = asyncHandler(async (req, res, next) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
@@ -28,8 +28,16 @@ const createUser = asyncHandler(async (req, res, next) => {
   }
   next();
 });
+const handleUserLogIn = asyncHandler(async (req, res, next)=>{
+  const errors = validationResult(req);
 
-// check pass code
+  if (!errors.isEmpty()) {
+    return res.render("log-in", { errors: errors.array() });
+  }
+  
+  next();
+})
+// check member pass code
 const checkMemberPassCode = asyncHandler(async (req, res) => {
   const errors = validationResult(req);
 
@@ -41,7 +49,7 @@ const checkMemberPassCode = asyncHandler(async (req, res) => {
     return res.render("join-the-club", { errors: errors.array() });
   }
 });
-
+// Check admin pass code
 const checkAdminPassCode = asyncHandler(async (req, res) => {
   const errors = validationResult(req);
   if (errors.isEmpty()) {
@@ -53,7 +61,8 @@ const checkAdminPassCode = asyncHandler(async (req, res) => {
   }
 });
 module.exports = {
-  createUser,
+  handleUserSignUp,
+  handleUserLogIn,
   checkMemberPassCode,
   checkAdminPassCode,
 };
