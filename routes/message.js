@@ -4,7 +4,9 @@ var messageController = require("../controllers/messageController");
 var createMessageValidationSchema = require("./utils/messageValidationSchema");
 const { checkSchema } = require("express-validator");
 
-router.get("/new", (req, res) => res.render("new-message-form"));
+router.get("/new", (req, res) =>
+  res.render("new-message-form", { errors: false })
+);
 router.post(
   "/new",
   checkSchema(createMessageValidationSchema),

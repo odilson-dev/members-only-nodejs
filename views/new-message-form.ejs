@@ -6,6 +6,8 @@
     <title>New message</title>
   </head>
   <body>
+    <h1>Create a new message</h1>
+    <% if(errors){ %> <%- include('errors', { errors }) %> <% }%>
     <form action="/messages/new" method="POST">
       <input type="hidden" name="userId" value="<%= currentUser.id %>" />
       <div>
