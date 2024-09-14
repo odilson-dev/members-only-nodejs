@@ -8,6 +8,7 @@
   <body>
     <h1>Hello <%= currentUser.first_name %></h1>
     <p>Enter the secret pass code to join the club</p>
+    <% if(errors){ %> <%- include('errors', { errors }) %> <% }%>
     <form action="/users/join-the-club/<%= currentUser.id %>" method="POST">
       <h2>Join the club now!</h2>
       <input type="text" name="passCode" id="passCode" />

@@ -30,14 +30,16 @@ const createUser = asyncHandler(async (req, res, next) => {
 });
 
 // check pass code
-const checkPassCode = asyncHandler(async (req, res) => {
+const checkMemberPassCode = asyncHandler(async (req, res) => {
   const errors = validationResult(req);
+
   if (errors.isEmpty()) {
     const { id } = req.params;
     await db.updateMembershipStatus(id, true);
     return res.redirect("/");
+  } else {
+    return res.render("join-the-club", { errors: errors.array() });
   }
-  res.status(400).json({ errors: errors.array() });
 });
 
 const checkAdminPassCode = asyncHandler(async (req, res) => {
@@ -46,11 +48,12 @@ const checkAdminPassCode = asyncHandler(async (req, res) => {
     const { id } = req.params;
     await db.updateAdminStatus(id, true);
     return res.redirect("/");
+  } else {
+    return res.render("admin-form", { errors: errors.array() });
   }
-  res.status(400).json({ errors: errors.array() });
 });
 module.exports = {
   createUser,
-  checkPassCode,
+  checkMemberPassCode,
   checkAdminPassCode,
 };

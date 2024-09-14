@@ -6,14 +6,7 @@
   </head>
   <body>
     <h1>Sign Up</h1>
-    <% if(errors){ %>
-
-    <ul class="errors">
-      <% errors.map(error => { %>
-      <li><%= error.msg %></li>
-      <% }) %>
-    </ul>
-    <% }%>
+    <% if(errors){ %> <%- include('errors', { errors }) %> <% }%>
     <form action="/users/new" method="POST">
       <div>
         <label for="first_name">First name</label>

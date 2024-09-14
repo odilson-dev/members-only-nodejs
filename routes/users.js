@@ -10,7 +10,9 @@ router.get("/", function (req, res, next) {
   res.send("respond with a resource");
 });
 
-router.get("/join-staff", (req, res) => res.render("admin-form"));
+router.get("/join-staff", (req, res) =>
+  res.render("admin-form", { errors: false })
+);
 router.post(
   "/join-staff/:id",
   body("adminPassCode")
@@ -30,7 +32,7 @@ router.post(
 );
 
 router.get("/join-the-club", (req, res) => {
-  res.render("join-the-club");
+  res.render("join-the-club", { errors: false });
 });
 
 router.post(
@@ -38,7 +40,7 @@ router.post(
   body("passCode")
     .equals("ODIN-CLUB")
     .withMessage("Pass code incorrect! Please try again"),
-  userController.checkPassCode
+  userController.checkMemberPassCode
 );
 
 module.exports = router;

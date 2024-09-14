@@ -8,6 +8,7 @@
   <body>
     <h1>Hello <%= currentUser.first_name %></h1>
     <p>Enter the secret pass code to become an administrator</p>
+    <% if(errors){ %> <%- include('errors', { errors }) %> <% }%>
     <form action="/users/join-staff/<%= currentUser.id %>" method="POST">
       <h2>Join the staff now!</h2>
       <input type="text" name="adminPassCode" id="adminPassCode" />
