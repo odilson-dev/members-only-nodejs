@@ -1,5 +1,3 @@
-var express = require("express");
-var router = express.Router();
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcryptjs");
@@ -48,25 +46,5 @@ passport.deserializeUser(async (id, done) => {
     done(err);
   }
 });
-router.use((req, res, next) => {
-  res.locals.currentUser = req.user;
-  next();
-});
 
-router.post(
-  "/log-in",
-  passport.authenticate("local", {
-    successRedirect: "/",
-    failureRedirect: "/",
-  })
-);
-router.get("/log-out", (req, res, next) => {
-  req.logout((err) => {
-    if (err) {
-      return next(err);
-    }
-    res.redirect("/");
-  });
-});
-
-module.exports = { passport, router };
+module.exports = { passport };

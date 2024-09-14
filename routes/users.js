@@ -24,7 +24,7 @@ router.post(
 router.post(
   "/new",
   checkSchema(createUserValidationSchema),
-  userController.createUser,
+  userController.handleUserSignUp,
   auth.passport.authenticate("local", {
     successRedirect: "/",
     failureRedirect: "/",
