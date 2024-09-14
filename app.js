@@ -9,7 +9,7 @@ const passport = require("passport");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
-var authRouter = require("./routes/auth").router;
+// var authRouter = require("./routes/auth").router;
 var messageRouter = require("./routes/message");
 
 var app = express();
@@ -28,7 +28,7 @@ app.use(session({ secret: "cats", resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use("/", authRouter);
+// app.use("/", authRouter);
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/messages", messageRouter);

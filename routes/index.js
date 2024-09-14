@@ -23,10 +23,23 @@ router.post(
   "/log-in",
   checkSchema(userLoginValidationSchema),
   userController.handleUserLogIn,
-  auth.passport.authenticate("local", {
-    successRedirect: "/",
-    failureRedirect: "/",
-  })
+  (req, res, next) => {
+    auth.passport.authenticate("local", (err, user, info) => {
+      if (err) {
+        return next(err); // Handle server errors
+      }
+      if (!user) {
+        // If authentication fails, render the homepage with the error message
+        return res.render("log-in", { errors: [{ msg: info.message }] });
+      }
+      req.logIn(user, (err) => {
+        if (err) {
+          return next(err);
+        }
+        return res.redirect("/"); // Redirect to the homepage on successful login
+      });
+    })(req, res, next);
+  }
 );
 
 router.get("/log-out", (req, res, next) => {

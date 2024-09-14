@@ -15,12 +15,16 @@ passport.use(
         const user = rows[0];
 
         if (!user) {
-          return done(null, false, { message: "Incorrect email" });
+          return done(null, false, {
+            message: "This email is not found in our database, please sign up",
+          });
         }
         const match = await bcrypt.compare(password, user.password);
         if (!match) {
           // passwords do not match!
-          return done(null, false, { message: "Incorrect password" });
+          return done(null, false, {
+            message: "The password is incorrect, please try again",
+          });
         }
 
         return done(null, user);
