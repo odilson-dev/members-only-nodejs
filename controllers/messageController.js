@@ -30,7 +30,7 @@ const createMessage = asyncHandler(async (req, res) => {
 const deleteMessage = asyncHandler(async (req, res) => {
   const { id } = req.params;
   await db.deleteMessage(id);
-  res.redirect("/users/dashboard");
+  res.redirect("/");
 });
 
 const getAllMessages = asyncHandler(async (req, res) => {

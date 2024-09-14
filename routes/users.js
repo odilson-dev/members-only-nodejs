@@ -10,7 +10,14 @@ router.get("/", function (req, res, next) {
   res.send("respond with a resource");
 });
 
-router.get("/be-an-admin", (req, res) => res.render("admin-form"));
+router.get("/join-staff", (req, res) => res.render("admin-form"));
+router.post(
+  "/join-staff/:id",
+  body("adminPassCode")
+    .equals("ODIN-CLUB-STAFF")
+    .withMessage("Admin Pass code incorrect! Please try again"),
+  userController.checkAdminPassCode
+);
 
 router.post(
   "/new",

@@ -35,12 +35,22 @@ const checkPassCode = asyncHandler(async (req, res) => {
   if (errors.isEmpty()) {
     const { id } = req.params;
     await db.updateMembershipStatus(id, true);
-    return res.send("Success, you're a member");
+    return res.redirect("/");
   }
   res.status(400).json({ errors: errors.array() });
 });
 
+const checkAdminPassCode = asyncHandler(async (req, res) => {
+  const errors = validationResult(req);
+  if (errors.isEmpty()) {
+    const { id } = req.params;
+    await db.updateAdminStatus(id, true);
+    return res.redirect("/");
+  }
+  res.status(400).json({ errors: errors.array() });
+});
 module.exports = {
   createUser,
   checkPassCode,
+  checkAdminPassCode,
 };
