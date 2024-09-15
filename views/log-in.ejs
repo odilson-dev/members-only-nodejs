@@ -7,15 +7,32 @@
     <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
-    <header><h1>Members Only</h1></header>
-    <h1>Please log in</h1>
-    <% if(errors){ %> <%- include('errors', { errors }) %> <% }%>
-    <form action="/log-in" method="POST">
-      <label for="email">Email</label>
-      <input id="email" name="email" placeholder="email" type="text" />
-      <label for="password">Password</label>
-      <input id="password" name="password" type="password" />
-      <button>Log In</button>
-    </form>
+    <%- include('header') %>
+    <div class="box-form">
+      <h1>Log in</h1>
+      <% if(errors){ %> <%- include('errors', { errors }) %> <% }%>
+      <form action="/log-in" method="POST">
+        <div class="field">
+          <label for="email">Email</label>
+          <input
+            id="email"
+            name="email"
+            placeholder="johndoe@example.com"
+            type="text"
+          />
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            placeholder="Password"
+          />
+        </div>
+
+        <button class="submit-btn" type="submit">Log In</button>
+      </form>
+    </div>
   </body>
 </html>

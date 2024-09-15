@@ -7,21 +7,29 @@
     <title>New message</title>
   </head>
   <body>
-    <header><h1>Members Only</h1></header>
-    <h1>Create a new message</h1>
-    <% if(errors){ %> <%- include('errors', { errors }) %> <% }%>
-    <form action="/messages/new" method="POST">
-      <input type="hidden" name="userId" value="<%= currentUser.id %>" />
-      <div>
-        <label for="title">Title:</label><br />
-        <input type="text" name="title" id="title" placeholder="Your title" />
-      </div>
+    <%- include('header') %>
+    <div class="box-form">
+      <h1>New message</h1>
+      <% if(errors){ %> <%- include('errors', { errors }) %> <% }%>
+      <form action="/messages/new" method="POST">
+        <input type="hidden" name="userId" value="<%= currentUser.id %>" />
+        <div class="field">
+          <label for="title">Title:</label><br />
+          <input type="text" name="title" id="title" placeholder="Your title" />
+        </div>
 
-      <div>
-        <label for="content">Message:</label><br />
-        <textarea name="content" id="content" cols="30" rows="10"></textarea>
-      </div>
-      <button type="submit">Submit</button>
-    </form>
+        <div class="field">
+          <label for="content">Message:</label><br />
+          <textarea
+            name="content"
+            id="content"
+            cols="30"
+            rows="10"
+            placeholder="Write your message here"
+          ></textarea>
+        </div>
+        <button class="submit-btn" type="submit">Submit</button>
+      </form>
+    </div>
   </body>
 </html>

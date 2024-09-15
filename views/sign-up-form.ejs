@@ -6,51 +6,59 @@
     <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
-    <header><h1>Members Only</h1></header>
-    <h1>Sign Up</h1>
-    <% if(errors){ %> <%- include('errors', { errors }) %> <% }%>
-    <form action="/users/new" method="POST">
-      <div>
-        <label for="first_name">First name</label>
-        <input
-          id="first_name"
-          name="first_name"
-          placeholder="John"
-          type="text"
-        />
-      </div>
-      <div>
-        <label for="last_name">Last name</label>
-        <input id="last_name" name="last_name" placeholder="Doe" type="text" />
-      </div>
-      <div>
-        <label for="email">Email</label>
-        <input
-          id="email"
-          name="email"
-          placeholder="johndoe@example.com"
-          type="text"
-        />
-      </div>
-      <div>
-        <label for="password">Password</label>
-        <input
-          id="password"
-          name="password"
-          type="password"
-          placeholder="Type your password"
-        />
-      </div>
-      <div>
-        <label for="confirmPassword">Confirm Password</label>
-        <input
-          id="confirmPassword"
-          name="confirmPassword"
-          type="password"
-          placeholder="Confirm your password"
-        />
-      </div>
-      <button>Sign Up</button>
-    </form>
+    <%- include('header') %>
+    <div class="box-form">
+      <h1>Sign Up</h1>
+      <% if(errors){ %> <%- include('errors', { errors }) %> <% }%>
+      <form action="/users/new" method="POST">
+        <div class="field">
+          <label for="first_name">First name</label><br />
+          <input
+            id="first_name"
+            name="first_name"
+            placeholder="John"
+            type="text"
+          />
+        </div>
+        <div class="field">
+          <label for="last_name">Last name</label><br />
+          <input
+            id="last_name"
+            name="last_name"
+            placeholder="Doe"
+            type="text"
+          />
+        </div>
+        <div class="field">
+          <label for="email">Email</label><br />
+          <input
+            id="email"
+            name="email"
+            placeholder="johndoe@example.com"
+            type="text"
+          />
+        </div>
+        <div class="field">
+          <label for="password">Password</label><br />
+          <input
+            id="password"
+            name="password"
+            type="password"
+            placeholder="Type your password"
+          />
+        </div>
+        <div>
+          <label for="confirmPassword" class="field">Confirm Password</label
+          ><br />
+          <input
+            id="confirmPassword"
+            name="confirmPassword"
+            type="password"
+            placeholder="Confirm your password"
+          />
+        </div>
+        <button class="submit-btn">Sign Up</button>
+      </form>
+    </div>
   </body>
 </html>
