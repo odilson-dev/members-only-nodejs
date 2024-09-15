@@ -105,3 +105,18 @@ textarea {
   border-radius: 5px;
   width: 100%;
 }
+.error {
+  color: red;
+  background-color: rgba(255, 106, 106, 0.219);
+  padding: 3px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+li {
+  list-style-type: none;
+}
+ul {
+  padding: 0;
+}
