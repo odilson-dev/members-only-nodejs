@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
+    <header><h1>Members Only</h1></header>
     <h1>Hello <%= currentUser.first_name %></h1>
     <p>Enter the secret pass code to join the club</p>
     <% if(errors){ %> <%- include('errors', { errors }) %> <% }%>

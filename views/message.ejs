@@ -1,15 +1,22 @@
 <div class="message">
-  <h1><%= message.title %></h1>
+  <h2><%= message.title %></h2>
   <p><%= message.text %></p>
   <% if(currentUser && currentUser.membership_status){ %>
 
   <p>
-    Written by: <%= message.first_name %> <%= message.last_name %> on <%=
-    message.created_at %>
+    Posted by
+    <span class="author"
+      ><%= message.first_name %> <%= message.last_name %>
+    </span>
+    on
+    <span class="date"
+      ><%= new Date(message.created_at).toLocaleDateString('en-US', { day:
+      'numeric', month: 'long', year: 'numeric' }) %></span
+    >
   </p>
 
   <% if(currentUser.admin) { %>
 
-  <button message_id="<%= message.id %>">Remove</button>
+  <button class="delete-btn" message_id="<%= message.id %>">Remove</button>
   <%} } %>
 </div>

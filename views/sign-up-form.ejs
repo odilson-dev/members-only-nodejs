@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
+    <header><h1>Members Only</h1></header>
     <h1>Sign Up</h1>
     <% if(errors){ %> <%- include('errors', { errors }) %> <% }%>
     <form action="/users/new" method="POST">

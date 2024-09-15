@@ -7,6 +7,7 @@
     <title>New message</title>
   </head>
   <body>
+    <header><h1>Members Only</h1></header>
     <h1>Create a new message</h1>
     <% if(errors){ %> <%- include('errors', { errors }) %> <% }%>
     <form action="/messages/new" method="POST">

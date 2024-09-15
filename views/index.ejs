@@ -6,28 +6,37 @@
     <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
-    <header><h1>Members Only</h1></header>
-    <% if (currentUser) { %>
-    <h1>WELCOME BACK <%= currentUser.first_name %></h1>
+    <%- include('header') %>
 
-    <a href="messages/new">Create a new message</a><br />
-    <% if (!currentUser.membership_status){ %>
-    <a href="/users/join-the-club">Become a member</a>
+    <div class="sub-header">
+      <% if (currentUser) { %>
+      <h2>WELCOME BACK <%= currentUser.first_name %>!</h2>
 
-    <% } else { %> <% if (!currentUser.admin){ %>
-    <a href="/users/join-staff">Join the staff</a>
+      <a href="messages/new">Create a new message</a><br />
+      <% if (!currentUser.membership_status){ %>
+      <a href="/users/join-the-club">Become a member</a>
 
-    <% } %> <% } %>
+      <% } else if (!currentUser.admin){ %>
+      <a href="/users/join-staff">Join the staff</a>
 
-    <a href="/log-out">LOG OUT</a>
-    <% } else { %>
-    <p>You already have an account? <a href="/log-in">Log In</a></p>
-    <p>You're new? Please <a href="/sign-up">Sign up</a></p>
+      <% } %>
+
+      <a href="/log-out">LOG OUT</a>
+
+      <% } else { %>
+
+      <p>
+        If you already have an account, <a href="/log-in">Log In</a> else please
+        <a href="/sign-up">Sign up</a>
+      </p>
+
+      <% } %>
+    </div>
 
     <div class="messages">
-      <h2>Messages</h2>
-      <% } messages.map( message => { %> <%- include('message', { message }) %>
-      <% }) %>
+      <h2>The Messages</h2>
+      <% messages.map( message => { %> <%- include('message', { message }) %> <%
+      }) %>
     </div>
     <script>
       const allDeleteButtons = document.querySelectorAll("button");
