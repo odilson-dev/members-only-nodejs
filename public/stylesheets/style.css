@@ -138,12 +138,15 @@ ul {
 
 footer {
   text-align: center;
-  background-color: gray;
+  background-color: rgb(114, 114, 114);
   color: white;
-  height: 60px;
+  height: 50px;
   font-size: 16px;
-  padding: 15px 0;
+  padding: 25px 0;
 }
 footer > p {
   margin: 0 0 10px 0;
+}
+footer > p > a {
+  font-weight: bold;
 }

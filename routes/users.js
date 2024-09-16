@@ -11,7 +11,9 @@ router.get("/", function (req, res, next) {
 });
 
 router.get("/join-staff", (req, res) => {
-  console.log(req.isAuthenticated());
+  if (!req.isAuthenticated()) {
+    res.redirect("/log-in");
+  }
   res.render("admin-form", { errors: false });
 });
 router.post(
@@ -33,6 +35,9 @@ router.post(
 );
 
 router.get("/join-the-club", (req, res) => {
+  if (!req.isAuthenticated()) {
+    res.redirect("/log-in");
+  }
   res.render("join-the-club", { errors: false });
 });
 
