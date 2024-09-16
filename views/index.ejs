@@ -4,9 +4,13 @@
     <meta charset="UTF-8" />
     <title>Members Only | Node JS</title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
+    <!-- <script
+      src="https://kit.fontawesome.com/4ab498ab44.js"
+      crossorigin="anonymous"
+    ></script> -->
   </head>
   <body>
-    <%- include('header', { currentUser }) %>
+    <%- include('header') %>
 
     <div class="sub-header">
       <% if (currentUser) { %>
@@ -38,6 +42,7 @@
       <% messages.map( message => { %> <%- include('message', { message }) %> <%
       }) %>
     </div>
+    <%- include('footer') %>
     <script>
       const allDeleteButtons = document.querySelectorAll("button");
 
