@@ -2,17 +2,30 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   margin: 0;
 }
+/* HEADER */
 
 header {
   background-color: gray;
   padding: 20px 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
 }
 header > h1 {
   margin: 0;
   color: white;
   padding-left: 20px;
 }
-
+.account-status-box {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 40px;
+}
+.account-status {
+  border: 1px solid white;
+  padding: 10px;
+  color: white;
+  border-radius: 3px;
+}
 a {
   color: #00b7ff;
   text-decoration: none;

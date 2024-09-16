@@ -10,9 +10,10 @@ router.get("/", function (req, res, next) {
   res.send("respond with a resource");
 });
 
-router.get("/join-staff", (req, res) =>
-  res.render("admin-form", { errors: false })
-);
+router.get("/join-staff", (req, res) => {
+  console.log(req.isAuthenticated());
+  res.render("admin-form", { errors: false });
+});
 router.post(
   "/join-staff/:id",
   body("adminPassCode")

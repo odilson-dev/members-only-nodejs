@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
-    <%- include('header') %>
+    <%- include('header', { currentUser }) %>
 
     <div class="sub-header">
       <% if (currentUser) { %>
