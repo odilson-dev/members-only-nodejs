@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
-    <%- include('header') %>
+    <%- include('header') %> <%- include('sub-header-form') %>
     <div class="box-form">
       <h1>Log in</h1>
       <% if(errors){ %> <%- include('errors', { errors }) %> <% }%>

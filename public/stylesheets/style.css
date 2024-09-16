@@ -78,6 +78,16 @@ a {
   background-color: aliceblue;
   padding: 10px 20px;
 }
+.sub-header > a {
+  font-size: 15px;
+  margin-right: 10px;
+}
+a:hover {
+  text-decoration: underline;
+}
+.log-out {
+  color: rgb(255, 45, 45);
+}
 /* FORMS */
 .box-form {
   width: 30%;

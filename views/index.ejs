@@ -4,10 +4,6 @@
     <meta charset="UTF-8" />
     <title>Members Only | Node JS</title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
-    <!-- <script
-      src="https://kit.fontawesome.com/4ab498ab44.js"
-      crossorigin="anonymous"
-    ></script> -->
   </head>
   <body>
     <%- include('header') %>
@@ -16,7 +12,7 @@
       <% if (currentUser) { %>
       <h2>WELCOME BACK <%= currentUser.first_name %>!</h2>
 
-      <a href="messages/new">Create a new message</a><br />
+      <a href="messages/new">Create a new message</a>
       <% if (!currentUser.membership_status){ %>
       <a href="/users/join-the-club">Become a member</a>
 
@@ -25,7 +21,7 @@
 
       <% } %>
 
-      <a href="/log-out">LOG OUT</a>
+      <a class="log-out" href="/log-out">Log out</a>
 
       <% } else { %>
 
@@ -38,7 +34,7 @@
     </div>
 
     <div class="messages">
-      <h2>The Messages</h2>
+      <h2>All Messages</h2>
       <% messages.map( message => { %> <%- include('message', { message }) %> <%
       }) %>
     </div>

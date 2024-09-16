@@ -7,7 +7,7 @@
     <title>New message</title>
   </head>
   <body>
-    <%- include('header') %>
+    <%- include('header') %> <%- include('sub-header-form') %>
     <div class="box-form">
       <h1>New message</h1>
       <% if(errors){ %> <%- include('errors', { errors }) %> <% }%>
@@ -31,5 +31,6 @@
         <button class="submit-btn" type="submit">Submit</button>
       </form>
     </div>
+    
   </body>
 </html>
