@@ -42,7 +42,7 @@ To run the app locally, follow these steps:
 
 ```
    cd members-only
-   pnpm install
+   npm install
 ```
 
 3. **Set up environment variables**
