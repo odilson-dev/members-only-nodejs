@@ -4,7 +4,7 @@ var userController = require("../controllers/userController");
 const createUserValidationSchema = require("./utils/userValidationSchemas");
 const { checkSchema, body } = require("express-validator");
 const auth = require("./auth");
-
+require("dotenv").config();
 /* GET users listing. */
 router.get("/", function (req, res, next) {
   res.send("respond with a resource");
@@ -19,7 +19,7 @@ router.get("/join-staff", (req, res) => {
 router.post(
   "/join-staff/:id",
   body("adminPassCode")
-    .equals("ODIN-CLUB-STAFF")
+    .equals(process.env.ADMIN_ACCESS)
     .withMessage("Admin Pass code incorrect! Please try again"),
   userController.checkAdminPassCode
 );
@@ -44,7 +44,7 @@ router.get("/join-the-club", (req, res) => {
 router.post(
   "/join-the-club/:id",
   body("passCode")
-    .equals("ODIN-CLUB")
+    .equals(process.env.ACCESS_CODE)
     .withMessage("Pass code incorrect! Please try again"),
   userController.checkMemberPassCode
 );
