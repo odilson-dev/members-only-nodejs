@@ -41,7 +41,7 @@ To run the app locally, follow these steps:
 2. **Install dependencies:**
 
 ```
-   cd members-only
+   cd members-only-nodejs
    npm install
 ```
 
