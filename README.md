@@ -28,7 +28,7 @@ The **Members Only Project** is an exclusive online clubhouse where users can wr
 
 #### Live Demo
 
-Check out the live version of the app: [Live Demo]()
+Check out the live version of the app: [Live Demo](https://members-only-node.adaptable.app/)
 
 #### Local Installation
 
